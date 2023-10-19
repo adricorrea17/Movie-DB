@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
 import GenresList from './components/GenresList';
 import MovieDetails from './components/MovieDetails';
 
@@ -10,6 +9,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
 
 const router = createBrowserRouter([
   {

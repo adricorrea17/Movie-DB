@@ -43,3 +43,8 @@ export async function getGenres() {
 
     return results.genres;
 }
+export async function SearchMovies(movie = ''){
+      const url = `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`
+      const results = await getResults( url );
+      return results
+}

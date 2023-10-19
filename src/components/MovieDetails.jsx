@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getMovie } from "../MoviedbReposity";
+import { getMovie,  SearchMovies } from "../MoviedbReposity";
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
@@ -12,9 +12,8 @@ export default function MovieDetails() {
 
     useEffect(() => {
         const asycFn = async () => {
-            console.dir(movieId);
+            
             const movie = await getMovie(movieId);
-
             setData(movie);
         }
         asycFn()
@@ -26,14 +25,18 @@ export default function MovieDetails() {
     }
     console.log(data)
     return (
-        <article>
-            <img className="w-100" src={`https://image.tmdb.org/t/p/w500/${data.backdrop_path}`} alt="" />
-            <img className="w-100" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt="" />
-            <h1>{data.title}</h1>
-            <p>{data.overview}</p>
-            <a href={`${data.homepage}`}>Pagina</a>
-            <Link to='/'>Volver</Link>
-        </article>
+        <section className="container mx-auto items-center grid grid-cols-2">
+            <picture className="mx-auto">
+                <img className="w-full" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt="" />
+            </picture>
+            <div className="my-auto text-white flex flex-col gap-5">
+                <h1 className="text-4xl font-bold">{data.title}</h1>
+                <p className="text-xl">{data.overview}</p>
+                <a id="pagina" href={`${data.homepage}`}><label htmlFor="pagina" className="text-lg">Pagina:</label> {data.homepage}</a>
+                <Link to='/' className="bg-gray-400  w-4/12 text-center py-1 rounded-lg">Volver</Link>
+            </div>
+        </section>
+
     );
 
 }

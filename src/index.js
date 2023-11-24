@@ -1,31 +1,16 @@
+
+import './index.css';
+import Layout from './components/Layout';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
-import GenresList from './components/GenresList';
-import MovieDetails from './components/MovieDetails';
+import { Lang, _ } from './lang';
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <GenresList />,
-  },
-  {
-    path: "movie/:movieId",
-    element: <MovieDetails />,
-  }
-]);
+const lang = new Lang;
+window.lang = lang;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Layout />
 );
 
 

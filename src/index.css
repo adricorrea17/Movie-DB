@@ -1,19 +1,132 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@layer tailwind-base, primereact, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+:root {
+  --primary: #940B92;
+  --secondary: #DA0C81;
+  --accent: #E95793;
+  --dark: #320b4f;
+}
+
+#main {
+  position: relative;
+  min-height: calc( 100vh - 73px );
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: black;
+  border-radius: 0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 14px;
+  border: 1px solid var(--primary);
+}
 
 
 body {
   margin: 0;
+  color: white;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(34, 34, 34);
+  background-color: rgb(9, 9, 9);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  color: white;
+  font-size: 30px !important;
+}
+
+.p-autocomplete-items {
+  background-color: rgb(23, 23, 23);
+  color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+}
+
+.p-autocomplete-item:hover {
+  background-color: rgb(104, 101, 101);
+}
+
+select{
+  background-color: transparent;
+  border: 2px var(--dark) solid;
+  padding-top: 0.50rem;
+  padding-bottom: 0.50rem;
+  padding-left: 0.50rem;
+  padding-right: 0.50rem;
+  border-radius: 10px;
+  outline: none;
+}
+
+input.p-component {
+
+  background-color: transparent;
+  width: 60rem;
+  border: 2px var(--dark) solid;
+  padding-top: 0.50rem;
+  padding-bottom: 0.50rem;
+  padding-left: 0.50rem;
+  padding-right: 0.50rem;
+  border-radius: 10px;
+  outline: none;
+  &:focus {
+    border: 2px var(--primary) solid;
+  }
+}
+
+.scale:hover {
+  transform: scale(1.2);
+}
+
+#headlessui-portal-root{
+  z-index: 999;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-left-color: var(--primary);
+  animation: spin 1s ease infinite;
+}
+.container{
+  max-width: 1600px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

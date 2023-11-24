@@ -1,42 +1,41 @@
-import React, { useEffect, useState } from "react";
-import MovieList from "./MovieList";
+import { Swiper,SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css/navigation";
+import 'swiper/css';
 import { getGenres } from "../MoviedbReposity";
+import React, { useEffect, useState } from "react";
+import ButtonGenre from "./ButtonGenre";
+import { useLang } from "./Layout";
 
-export default function GenresList() {
-    const [genres, setGenres] = useState([]);
-    const [loadedGenres, setLoadedGenres] = useState(4);
-    
-    useEffect(() => {
-        const asycFn = async () => {
-            setGenres( await getGenres() );
-        };
-        asycFn();
-    }, []);
+export default function Genres() {
+  const [genres, setGenres] = useState([]);
+  const lang = useLang()
 
-    useEffect(() => {
-        function handleScroll() {
-            if (
-                window.scrollY + window.innerHeight >= document.documentElement.scrollHeight &&
-                loadedGenres < genres.length
-            ) {
-               
-                const newLoadedGenres = loadedGenres + 4;
-                setLoadedGenres(newLoadedGenres);
-            }
-        }
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [loadedGenres, genres]);
+  useEffect(() => {
+    const asyncFn = async () => {
+      const genresData = await getGenres();
+      setGenres(genresData); 
+    };
+    asyncFn();
+  },[lang]);
 
-
-    return (
-        <>
-            {genres.slice(0, loadedGenres).map((genre) => (
-                <MovieList key={genre.id} genreName={genre.name} genreId={genre.id} />
-            ))}
-        </>
-    );
-    
+  return (
+    <section className="mx-auto mt-5 container">
+      <Swiper
+        navigation={true}
+        modules={[Navigation]}
+        spaceBetween={30}
+        slidesPerView={'auto'}
+        loop={true}
+        className="rounded-xl"
+      >
+        {genres.map(genre => (
+          <SwiperSlide className=" text-white text-center my-auto py-4 max-w-max" key={genre.id}>
+            <ButtonGenre genre={genre} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
+  );
+  
 }

@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
 import { SearchMovies } from '../MoviedbReposity';
 
 export default function Search() {
